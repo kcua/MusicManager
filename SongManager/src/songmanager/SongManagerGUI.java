@@ -4,17 +4,21 @@
  */
 package songmanager;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Karl Cuaresma
  */
 public class SongManagerGUI extends javax.swing.JFrame {
+    ArrayList<Song> songs; //declaration of arrayList
 
     /**
      * Creates new form SongManagerGUI
      */
     public SongManagerGUI() {
         initComponents();
+    songs = new ArrayList<>();
     }
 
     /**
@@ -37,7 +41,7 @@ public class SongManagerGUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         displayTA = new javax.swing.JTextArea();
         searchTF = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        searchLBL = new javax.swing.JLabel();
         addBTN = new javax.swing.JButton();
         deleteBTN = new javax.swing.JButton();
         searchBTN = new javax.swing.JButton();
@@ -46,6 +50,11 @@ public class SongManagerGUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         exitBTN.setText("Exit");
+        exitBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitBTNActionPerformed(evt);
+            }
+        });
 
         musicManagerLBL.setText("Music Manager");
 
@@ -65,9 +74,14 @@ public class SongManagerGUI extends javax.swing.JFrame {
         displayTA.setRows(5);
         jScrollPane1.setViewportView(displayTA);
 
-        jLabel1.setText("Search:");
+        searchLBL.setText("Search:");
 
         addBTN.setText("Add");
+        addBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBTNActionPerformed(evt);
+            }
+        });
 
         deleteBTN.setText("Delete");
 
@@ -104,7 +118,7 @@ public class SongManagerGUI extends javax.swing.JFrame {
                                         .addGroup(layout.createSequentialGroup()
                                             .addComponent(genreLBL)
                                             .addGap(9, 9, 9)))
-                                    .addComponent(jLabel1))
+                                    .addComponent(searchLBL))
                                 .addGap(31, 31, 31)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -139,7 +153,7 @@ public class SongManagerGUI extends javax.swing.JFrame {
                     .addComponent(genreTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                    .addComponent(searchLBL)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(searchTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(searchBTN)))
@@ -162,6 +176,25 @@ public class SongManagerGUI extends javax.swing.JFrame {
     private void titleTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titleTFActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_titleTFActionPerformed
+
+    private void exitBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBTNActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_exitBTNActionPerformed
+
+    private void addBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBTNActionPerformed
+        // TODO add your handling code here:
+        Song song = new Song();
+        String title = titleTF.getText();
+        song.setTitle(title);
+        String artist = artistTF.getText();
+        song.setArtist(artist);
+        String genre = genreTF.getText();
+        song.setGenre(genre);
+        songs.add(song);
+        
+        displayTA.setText("Song has been added to the Playlist!" + "\n Title: " + song.getTitle() + "\n Artist: "+ song.getArtist()+ "\n Genre: " + song.getGenre() + "\n Size of Playlist: " +songs.size());
+    }//GEN-LAST:event_addBTNActionPerformed
 
     /**
      * @param args the command line arguments
@@ -207,11 +240,11 @@ public class SongManagerGUI extends javax.swing.JFrame {
     private javax.swing.JButton exitBTN;
     private javax.swing.JLabel genreLBL;
     private javax.swing.JTextField genreTF;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton moveBTN;
     private javax.swing.JLabel musicManagerLBL;
     private javax.swing.JButton searchBTN;
+    private javax.swing.JLabel searchLBL;
     private javax.swing.JTextField searchTF;
     private javax.swing.JLabel titleLBL;
     private javax.swing.JTextField titleTF;
